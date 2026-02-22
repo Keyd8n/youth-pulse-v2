@@ -24,12 +24,12 @@
 ```mermaid
 graph TD
     subgraph "Клієнт (Браузер)"
-        A[Frontend (React + Vite)]
+        A["Frontend (React + Vite)"]
     end
     subgraph "Сервер"
-        B[Backend (FastAPI)]
-        C[База даних (MongoDB)]
-        D[Google Generative AI]
+        B["Backend (FastAPI)"]
+        C["База даних (MongoDB)"]
+        D["Google Generative AI"]
     end
     A -- REST API --> B
     B -- CRUD --> C
