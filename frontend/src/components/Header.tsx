@@ -1,6 +1,6 @@
 import { Navbar, Container, Nav, Button, NavDropdown } from 'react-bootstrap';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { BarChart3, ShieldCheck, Sun, Moon, Settings, LogOut, Search } from 'lucide-react';
+import { BarChart3, ShieldCheck, Sun, Moon, Settings, LogOut } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 const Header = () => {

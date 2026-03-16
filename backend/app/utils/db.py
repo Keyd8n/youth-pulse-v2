@@ -3,7 +3,9 @@ from pymongo import MongoClient
 from dotenv import load_dotenv
 from bson.objectid import ObjectId
 
+# Шукаємо .env спочатку в поточній папці, потім на рівень вище (в корені проекту)
 load_dotenv()
+load_dotenv(os.path.join(os.path.dirname(__file__), "../../../.env"))
 
 def get_db():
     uri = os.getenv("MONGO_URI")

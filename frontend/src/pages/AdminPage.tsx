@@ -14,12 +14,10 @@ import { ColumnInfo, Survey } from '../types';
 import { 
     Upload, 
     Settings, 
-    ListChecks, 
     Save, 
     ArrowRight, 
     Trash2, 
     RefreshCw, 
-    Info, 
     Edit3, 
     Building2, 
     Sparkles, 

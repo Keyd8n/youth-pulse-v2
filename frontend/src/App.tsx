@@ -3,7 +3,6 @@ import HomePage from './pages/HomePage';
 import LandingPage from './pages/LandingPage';
 import DashboardPage from './pages/DashboardPage';
 import AdminPage from './pages/AdminPage';
-import EditorPage from './pages/EditorPage';
 import LoginPage from './pages/LoginPage';
 import Header from './components/Header';
 import Footer from './components/Footer';

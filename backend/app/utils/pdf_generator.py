@@ -12,12 +12,14 @@ class SurveyPDF(FPDF):
 
     def footer(self):
         self.set_y(-15)
+        # Try to use DejaVu I if it was loaded, else use regular DejaVu, else Helvetica
         try:
-            # Try to use DejaVu I if it was loaded
             self.set_font("DejaVu", "I", 8)
         except:
-            # Fallback to standard font if DejaVu I is not available
-            self.set_font("Helvetica", "I", 8)
+            try:
+                self.set_font("DejaVu", "", 8)
+            except:
+                self.set_font("Helvetica", "I", 8)
         self.cell(0, 10, f"Сторінка {self.page_no()}/{{nb}}", 0, 0, "C")
 
 def generate_chart_image(q_type, data, font_path=None):
@@ -130,9 +132,9 @@ def generate_survey_pdf(survey):
     
     # Check for fonts
     font_paths = [
-        "C:\\Windows\\Fonts\\arial.ttf",
-        "C:\\Windows\\Fonts\\times.ttf",
-        "C:\\Windows\\Fonts\\verdana.ttf"
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+        "/usr/share/fonts/TTF/DejaVuSans.ttf",
+        "C:\\Windows\\Fonts\\arial.ttf"
     ]
     
     font_path = next((p for p in font_paths if os.path.exists(p)), None)
@@ -140,18 +142,21 @@ def generate_survey_pdf(survey):
     if font_path:
         try:
             pdf.add_font("DejaVu", "", font_path)
-            bold_path = font_path.replace(".ttf", "bd.ttf")
+            
+            # Find bold/italic versions more intelligently
+            bold_path = font_path.replace(".ttf", "-Bold.ttf") if "/usr/share/fonts" in font_path else font_path.replace(".ttf", "bd.ttf")
             if os.path.exists(bold_path):
                 pdf.add_font("DejaVu", "B", bold_path)
             else:
                 pdf.add_font("DejaVu", "B", font_path)
                 
-            italic_path = font_path.replace(".ttf", "i.ttf")
+            italic_path = font_path.replace(".ttf", "-Oblique.ttf") if "/usr/share/fonts" in font_path else font_path.replace(".ttf", "i.ttf")
             if os.path.exists(italic_path):
                 pdf.add_font("DejaVu", "I", italic_path)
             
             font_name = "DejaVu"
-        except:
+        except Exception as e:
+            print(f"Error loading font: {e}")
             font_name = "Helvetica"
     else:
         font_name = "Helvetica"

@@ -48,65 +48,71 @@ graph TD
 
 ## 🚀 Налаштування та запуск
 
-Для запуску проєкту локально виконайте наступні кроки:
+Найпростіший спосіб запустити проєкт — використовувати Docker. Також можливий ручний запуск для розробки.
 
-### Передумови
+### 📋 Попередні вимоги
 
--   [Python 3.10+](https://www.python.org/downloads/)
--   [Node.js 18+](https://nodejs.org/en/)
--   [MongoDB](https://www.mongodb.com/try/download/community) (локально або через Atlas)
+-   [Git](https://git-scm.com/)
+-   [Docker](https://www.docker.com/get-started) та [Docker Compose](https://docs.docker.com/compose/install/) (для Docker-запуску)
+-   [Python 3.11+](https://www.python.org/downloads/) та [Node.js 20+](https://nodejs.org/en/) (для ручного запуску)
 
-### 1. Клонування репозиторію
+---
 
+### 🐋 Спосіб 1: Docker (Рекомендовано)
+
+Це запустить усі компоненти (Frontend, Backend, MongoDB) однією командою.
+
+1.  **Клонуйте репозиторій:**
+    ```bash
+    git clone https://github.com/ВАШ_ЛОГІН/youthpulse.git
+    cd youthpulse
+    ```
+
+2.  **Налаштуйте змінні оточення:**
+    Створіть файл `.env` у **корені проєкту** та додайте ваші ключі (використовуйте `.env.example` як шаблон):
+    ```bash
+    cp .env.example .env
+    # Відредагуйте .env, додавши GEMINI_API_KEY та MONGO_URI
+    ```
+
+3.  **Запустіть комплекс:**
+    ```bash
+    docker-compose up --build
+    ```
+
+**Доступ до системи:**
+-   🌐 **Frontend:** [http://localhost](http://localhost)
+-   🔌 **Backend API:** [http://localhost/api/](http://localhost/api/)
+
+---
+
+### 🛠️ Спосіб 2: Ручний запуск (для розробки)
+
+Якщо ви хочете вносити зміни та бачити їх миттєво без перезбірки контейнерів.
+
+#### 1. Спільне налаштування
+Створіть файл `.env` у корені проєкту (як описано вище). Він буде використовуватися і бекендом, і фронтендом.
+
+#### 2. Запуск Backend
 ```bash
-git clone <URL-вашого-репозиторію>
-cd <назва-директорії-проєкту>
-```
-
-### 2. Налаштування Backend
-
-```bash
-# Перейдіть у директорію бекенду
 cd backend
-
-# Створіть та активуйте віртуальне оточення
 python -m venv venv
-source venv/bin/activate  # для Linux/macOS
-.\venv\Scripts\activate   # для Windows
+# Активуйте віртуальне оточення:
+# Windows: .\venv\Scripts\activate
+# Linux/macOS: source venv/bin/activate
 
-# Встановіть залежності
 pip install -r requirements.txt
-
-# Створіть файл .env та додайте змінні середовища
-# (MONGO_URI, GOOGLE_API_KEY, та ін.)
-cp .env.example .env
-# Відредагуйте .env
-
-# Запустіть сервер
 uvicorn main:app --reload
 ```
 
-Сервер буде доступний за адресою `http://localhost:8000`.
-
-### 3. Налаштування Frontend
-
+#### 3. Запуск Frontend
 ```bash
-# Перейдіть у директорію фронтенду
-cd ../frontend
-
-# Встановіть залежності
+cd frontend
 npm install
-
-# Створіть файл .env та вкажіть URL бекенду
-# VITE_API_BASE_URL=http://localhost:8000
-cp .env.example .env
-# Відредагуйте .env
-
-# Запустіть додаток
 npm run dev
 ```
 
-Клієнтська частина буде доступна за адресою `http://localhost:5173` (або іншим портом, вказаним Vite).
+---
 
 ## 🖼️ Галерея
 

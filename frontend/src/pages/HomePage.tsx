@@ -3,7 +3,7 @@ import { getSurveys } from '../api';
 import { Survey } from '../types';
 import { Card, Button, Row, Col, Form, Badge, Spinner, Alert, Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { Filter, Calendar, Building2, Search, TrendingUp, ChevronRight, MessageSquare, Users, Sparkles, SortDesc } from 'lucide-react';
+import { Filter, Calendar, Building2, Search, ChevronRight, MessageSquare, Sparkles, SortDesc } from 'lucide-react';
 
 const HomePage = () => {
     const [surveys, setSurveys] = useState<Survey[]>([]);
